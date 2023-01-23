@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Organizer
 {
@@ -7,19 +9,19 @@ namespace Organizer
     {
         public static void Main(string[] args)
         {
-            // Press <F5> to run this code, when "Hello World!" appears in a black box, remove the line below and write your code below.
-            Console.WriteLine("Hello World!");
-            ShowList("Example of ShowList", new List<int>() { -33, 3, 2, 2, 3, 34, 34, 32, 1, 3, 5, 3, -22, -99, 33, -22, 11, 3, 33, 12, -2, -21, 4, 34, 22, 15, 34,-22 });
+            // create new random list, print to screen
+            List<int> unsortedList = Randomizer(10);
+            Console.WriteLine("Unsorted:");
+            unsortedList.ForEach(i => Console.WriteLine(i));
+            var sorter = new ShiftHighestSort();
+            
+            // take the unsorted list and sort the numbers lowest to highest, print to screen
+            List<int> sortedList = sorter.Sort(unsortedList);
+            Console.WriteLine();
+            Console.WriteLine("Sorted:");
+            sortedList.ForEach(i => Console.WriteLine(i));
         }
 
-
-        /* Example of a static function */
-
-        /// <summary>
-        /// Show the list in lines of 20 numbers each
-        /// </summary>
-        /// <param name="label">The label for this list</param>
-        /// <param name="theList">The list to show</param>
         public static void ShowList(string label, List<int> theList)
         {
             int count = theList.Count;
@@ -40,5 +42,15 @@ namespace Organizer
             }
             Console.WriteLine();
         }
+
+        public static List<int> Randomizer(int maxNumbers)
+        {
+            Random rnd = new Random();
+            List<int> unsortedList = new List<int>();
+            for (int i = 1; i <= maxNumbers; i++)
+                unsortedList.Add(rnd.Next(-99, 99));
+            return unsortedList;
+        }
     }
 }
+

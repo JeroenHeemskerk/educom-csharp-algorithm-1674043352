@@ -7,11 +7,6 @@ namespace Organizer
     {
         private List<int> array = new List<int>();
 
-        /// <summary>
-        /// Sort an array using the functions below
-        /// </summary>
-        /// <param name="input">The unsorted array</param>
-        /// <returns>The sorted array</returns>
         public List<int> Sort(List<int> input)
         {
             array = new List<int>(input);
@@ -27,7 +22,28 @@ namespace Organizer
         /// <param name="high">De index within this.array to stop with</param>
         private void SortFunction(int low, int high)
         {
-            throw new NotImplementedException();
+            // determines how often the algorithm has to start from the beginning
+            // for a list of 10 numbers, it needs to repeat 9 times
+            int nrRepeats = high;
+            while (nrRepeats > 0)
+            {
+                // determines where the algorithm is in the list
+                // every repetition, the algorith stops 1 number earlier
+                int x = 0;
+                while (x < high)
+                {
+                    if(array[x] > array[x+1])
+                    {
+                        int number1, number2;
+                        number1 = array[x];
+                        number2 = array[x + 1];
+                        array[x + 1] = number1;
+                        array[x] = number2;
+                    }
+                    x++;
+                }
+                nrRepeats--;
+            }
         }    
     }
 }
